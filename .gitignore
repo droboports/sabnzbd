@@ -3,6 +3,7 @@ download/*
 target/*
 logfile*
 *.tgz
+origin
 
 ### Linux ###
 *~

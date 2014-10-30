@@ -10,7 +10,7 @@ framework_version="2.0"
 
 # app description
 name="sabnzbd"
-version="0.7.18"
+version="0.7.19"
 description="Usenet downloader"
 
 # framework-mandated variables
@@ -42,16 +42,27 @@ echo $(date +"%Y-%m-%d %H-%M-%S"): ${0} ${@}
 # enable script tracing
 set -o xtrace
 
+# _is_running
+# args: path to pid file
+# returns: 0 if pid is running, 1 if not running or if pidfile does not exist.
+_is_running() {
+  /sbin/start-stop-daemon -K -s 0 -x "${python}" -p "${pidfile}" -q
+}
+
 start() {
   local PORT=""
   [[ ! -f "${conffile}" ]] && PORT=":8081"
   rm -f "${pidfile}"
-  PATH="${prog_dir}/libexec:${DROBOAPPS_DIR}/git/bin:${PATH}" PYTHONPATH="${prog_dir}/lib/python2.7/site-packages" "${python}" "${prog_dir}/app/SABnzbd.py" --server 0.0.0.0${PORT} --config-file "${conffile}" --pidfile "${pidfile}" --daemon
+  PATH="${prog_dir}/libexec:${DROBOAPPS_DIR}/git/bin:${PATH}" PYTHONPATH="${prog_dir}/lib/python2.7/site-packages" "${python}" "${prog_dir}/app/SABnzbd.py" --server 0.0.0.0${PORT} --config-file "${conffile}" --pidfile "${pidfile}" --browser 0 --daemon
 }
 
 _service_start() {
   set +e
   set +u
+  if _is_running "${pidfile}"; then
+    echo ${name} is already running >&3
+    return 1
+  fi
   start_service
   set -u
   set -e
@@ -72,12 +83,12 @@ _service_status() {
 }
 
 _service_help() {
-  echo "Usage: $0 [start|stop|restart|status|update]" >&3
+  echo "Usage: $0 [start|stop|restart|status]" >&3
   set +e
   exit 1
 }
 
 case "${1:-}" in
-  start|stop|restart|status|update) _service_${1} ;;
+  start|stop|restart|status) _service_${1} ;;
   *) _service_help ;;
 esac

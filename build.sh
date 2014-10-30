@@ -131,21 +131,23 @@ _PYTHON_HOST_PLATFORM="linux-armv7l" PYTHONPATH="${DEST}/lib/python2.7/site-pack
 
 ### SABNZBD ###
 _build_sabnzbd() {
-#local BRANCH="0.7.x"
-#local FOLDER="app"
-#local URL="https://github.com/sabnzbd/sabnzbd.git"
+local BRANCH="0.7.x"
+local FOLDER="app"
+local URL="https://github.com/sabnzbd/sabnzbd.git"
 
-#_download_git "${BRANCH}" "${FOLDER}" "${URL}"
-#rm -fr target/app/.git target/app/win target/app/osx
-
-local VERSION="0.7.18"
-local FOLDER="SABnzbd-${VERSION}"
-local FILE="${FOLDER}-src.tar.gz"
-local URL="http://sourceforge.net/projects/sabnzbdplus/files/sabnzbdplus/${VERSION}/${FILE}"
-
-_download_tgz "${FILE}" "${URL}" "${FOLDER}"
+_download_git "${BRANCH}" "${FOLDER}" "${URL}"
+rm -fr "target/${FOLDER}/win" "target/${FOLDER}/osx"
 mkdir -p "${DEST}/app"
 cp -avR "target/${FOLDER}"/* "${DEST}/app/"
+
+#local VERSION="0.7.18"
+#local FOLDER="SABnzbd-${VERSION}"
+#local FILE="${FOLDER}-src.tar.gz"
+#local URL="http://sourceforge.net/projects/sabnzbdplus/files/sabnzbdplus/${VERSION}/${FILE}"
+
+#_download_tgz "${FILE}" "${URL}" "${FOLDER}"
+#mkdir -p "${DEST}/app"
+#cp -avR "target/${FOLDER}"/* "${DEST}/app/"
 }
 
 ### BUILD ###
