@@ -31,7 +31,7 @@ set -o pipefail # propagate last error code on pipe
 
 # ensure log folder exists
 logfolder="$(dirname ${logfile})"
-[[ ! -d "${logfolder}" ]] && mkdir -p "${logfolder}"
+if [[ ! -d "${logfolder}" ]]; then mkdir -p "${logfolder}"; fi
 
 # redirect all output to logfile
 exec 3>&1 1>> "${logfile}" 2>&1
