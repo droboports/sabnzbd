@@ -20,3 +20,9 @@ find "${prog_dir}" -type f -name "*.default" -print | while read deffile; do
     cp -vf "${deffile}" "${basefile}"
   fi
 done
+
+if [ -d "${prog_dir}/data/logs" ]; then
+  mv "${prog_dir}/data/logs/"* "${tmp_dir}"
+  rmdir "${prog_dir}/data/logs"
+fi
+ln -fs "${tmp_dir}" "${prog_dir}/data/logs"
