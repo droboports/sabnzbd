@@ -31,6 +31,7 @@ fi
 start() {
   local PORT=""
   if [ ! -f "${conffile}" ]; then PORT=":8081"; fi
+  HOME="${prog_dir}/data" \
   PATH="${prog_dir}/libexec:${DROBOAPPS_DIR}/git/bin:${PATH}" \
   PYTHONPATH="${prog_dir}/lib/python2.7/site-packages" \
   "${daemon}" "${prog_dir}/app/SABnzbd.py" --server 0.0.0.0${PORT} --config-file "${conffile}" --pidfile "${pidfile}" --browser 0 --daemon
