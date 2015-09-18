@@ -7,10 +7,10 @@
 
 framework_version="2.1"
 name="sabnzbd"
-version="0.7.20"
-description="Usenet downloader"
+version="0.7.20-1"
+description="SABnzbd is a Usenet binary newsreader"
 depends="python2"
-webui=":8081/"
+webui="WebUI"
 
 prog_dir="$(dirname "$(realpath "${0}")")"
 daemon="${DROBOAPPS_DIR}/python2/bin/python"
@@ -47,7 +47,6 @@ STDERR=">&4"
 echo "$(date +"%Y-%m-%d %H-%M-%S"):" "${0}" "${@}"
 set -o errexit  # exit on uncaught error code
 set -o nounset  # exit on unset variable
-set -o pipefail # propagate last error code on pipe
 set -o xtrace   # enable script tracing
 
 main "${@}"

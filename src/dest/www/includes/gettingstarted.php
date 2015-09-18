@@ -1,0 +1,2 @@
+<p>On the first access <?php echo $appname; ?> will launch a setup wizard to ask for its configuration. A complete step-by-step guide for this first time setup can be found <a href="http://wiki.sabnzbd.org/quick-setup" target="_new">here</a>.</p>
+<p>It is strongly recommended to password-protect <?php echo $appname; ?> if it is going to be exposed to the internet. This can be done using the setup wizard or later in <?php echo $appname; ?> settings page.</p>

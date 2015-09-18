@@ -1,0 +1,8 @@
+/tmp/DroboApps/sabnzbd/log.txt {
+  missingok
+  notifempty
+  size 50k
+  rotate 1
+  su root root
+  copytruncate
+}
