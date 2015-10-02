@@ -26,3 +26,6 @@ if [ -d "${prog_dir}/data/logs" ]; then
   rmdir "${prog_dir}/data/logs"
 fi
 ln -fs "${tmp_dir}" "${prog_dir}/data/logs"
+
+# install apache 2.x
+/usr/bin/DroboApps.sh install_version apache 2
